@@ -1,0 +1,27 @@
+<table class="table" *ngIf="listado?.length">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Paciente</th>
+      <th scope="col">Documento</th>
+      <th scope="col">Especialidad</th>
+      <th scope="col">Costo</th>
+      <th scope="col">Costo Total</th>
+      <th scope="col">Fecha</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let atencion of listado;">
+      <th scope="row">{{ atencion.id }}</th>
+      <td>{{atencion.paciente}}</td>
+      <td>{{atencion.documento}}</td>
+      <td>{{atencion?.especialidad?.nombre}}</td>
+      <td>{{atencion.costo}}</td>
+      <td>{{atencion.costo | costoTotal:21}}</td>
+      <td>{{atencion.fecha | date:'dd/MM/yyyy'}}</td>
+      <td>
+        <i class="bi bi-pencil" [routerLink]="['/modificar/' + atencion.id]"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

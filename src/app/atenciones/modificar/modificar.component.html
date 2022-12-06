@@ -1,0 +1,42 @@
+<form [formGroup]="formulario" *ngIf="atencion">
+  <div class="mb-3">
+    <label for="inputPaciente" class="form-label">Paciente:</label>
+    <input required type="text" class="form-control" id="inputPaciente" name="paciente" formControlName="paciente">
+  </div>
+  <div class="mb-3">
+    <label for="inputDocumento" class="form-label">Documento:</label>
+    <input required type="number" class="form-control" id="inputDocumento" name="documento" formControlName="documento">
+  </div>
+  <div class="mb-3">
+    <label for="inputCosto" class="form-label">Costo:</label>
+    <input required type="number" class="form-control" id="inputCosto" name="costo" formControlName="costo">
+  </div>
+  <div class="mb-3">
+    <label for="selectEspecialidadId" class="form-label">Especialidad:</label>
+    <select required class="form-select" id="selectEspecialidadId" name="especialidadId"
+      formControlName="especialidadId">
+      <option *ngFor="let especialidad of listadoEspecialidades" [value]="especialidad.id">
+        {{ especialidad.nombre }}
+      </option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="selectMedicoId" class="form-label">Medico:</label>
+    <select required class="form-select" id="selectMedicoId" name="medicoId" formControlName="medicoId">
+      <option *ngFor="let medico of listadoMedicos" [value]="medico.id">
+        {{ medico.nombre }}
+      </option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="inputFecha" class="form-label">Fecha:</label>
+    <input required type="date" class="form-control" id="inputFecha" name="fecha" formControlName="fecha" />
+    <div *ngIf="formulario.controls['fecha'].invalid &&  formulario.controls['fecha'].hasError('atencionMenor3Fechas')">
+      <p>Ya existen 3 atenciones con esta fecha</p>
+    </div>
+  </div>
+
+  <p *ngIf="formulario.invalid && formulario.touched">Alguno de los datos es inválido.</p>
+
+  <button type="submit" class="btn btn-primary" (click)="guardar()">Guardar</button>
+</form>
